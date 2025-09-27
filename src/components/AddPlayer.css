@@ -1,0 +1,56 @@
+.add-player {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.add-player h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.add-player-form {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.player-input {
+  flex: 1;
+  min-width: 200px;
+}
+
+.add-player button {
+  white-space: nowrap;
+}
+
+.add-player button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.add-player button:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .add-player {
+    padding: 20px 15px;
+  }
+  
+  .add-player-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .player-input {
+    min-width: unset;
+  }
+}
