@@ -18,7 +18,7 @@
 
 .table-header {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px 100px 120px;
+  grid-template-columns: 120px 1fr 100px 100px 100px 220px;
   gap: 15px;
   padding: 15px 0;
   border-bottom: 2px solid #eee;
@@ -28,7 +28,7 @@
 
 .player-row {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px 100px 120px;
+  grid-template-columns: 120px 1fr 100px 100px 100px 220px;
   gap: 15px;
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
@@ -41,16 +41,41 @@
 }
 
 .player-row.podium {
-  background: linear-gradient(90deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.08), rgba(255, 255, 255, 0.08));
 }
 
 .rank-col {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-weight: bold;
 }
 
-.rank-icon {
-  font-size: 1.5rem;
+.rank-number {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.rank-medal {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.rank-medal-1 {
+  background: linear-gradient(135deg, #f5c623, #f2991f);
+}
+
+.rank-medal-2 {
+  background: linear-gradient(135deg, #cfd0d2, #9ea0a3);
+}
+
+.rank-medal-3 {
+  background: linear-gradient(135deg, #d7a46b, #b3762b);
 }
 
 .name-col {
@@ -97,14 +122,20 @@
   display: flex;
   gap: 8px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-.win-btn, .loss-btn {
+.win-btn,
+.loss-btn,
+.admin-btn {
   padding: 6px 12px;
   font-size: 12px;
   border-radius: 4px;
   font-weight: bold;
   transition: all 0.2s ease;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 .win-btn {
@@ -123,6 +154,34 @@
   background: linear-gradient(135deg, #d32f2f, #b71c1c);
 }
 
+.admin-btn {
+  background: #9e9e9e;
+}
+
+.rename-btn {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+}
+
+.rename-btn:hover {
+  background: linear-gradient(135deg, #0097a7, #007c91);
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.reset-btn:hover {
+  background: linear-gradient(135deg, #f57c00, #ef6c00);
+}
+
+.remove-btn {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+.remove-btn:hover {
+  background: linear-gradient(135deg, #7b1fa2, #6a1b9a);
+}
+
 .empty-state {
   text-align: center;
   padding: 40px 20px;
@@ -133,21 +192,27 @@
 @media (max-width: 768px) {
   .table-header,
   .player-row {
-    grid-template-columns: 60px 1fr 80px 80px 80px 100px;
+    grid-template-columns: 90px 1fr 80px 80px 80px 1fr;
     gap: 10px;
     font-size: 14px;
   }
-  
+
   .leaderboard {
     padding: 20px 15px;
   }
-  
-  .actions-col {
+
+  .rank-col {
     flex-direction: column;
     gap: 4px;
   }
-  
-  .win-btn, .loss-btn {
+
+  .actions-col {
+    justify-content: flex-start;
+  }
+
+  .win-btn,
+  .loss-btn,
+  .admin-btn {
     padding: 4px 8px;
     font-size: 10px;
   }

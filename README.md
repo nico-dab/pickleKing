@@ -5,7 +5,7 @@ A React-based leaderboard application for tracking pickleball matches among cowo
 ## ✨ Features
 
 - **Interactive Leaderboard**: View current rankings sorted by points and win rate
-- **Player Management**: Add new players easily
+- **Player Management**: Add, rename, reset, or remove players backed by Supabase
 - **Match Tracking**: Record wins and losses with automatic point calculation
 - **Responsive Design**: Works on desktop and mobile devices
 - **Real-time Updates**: Rankings update instantly as matches are recorded
@@ -109,3 +109,48 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 Built with ❤️ for pickleball enthusiasts!
+
+## Supabase Setup
+
+1. Create a new project at https://app.supabase.com and note the project URL and anon API key (Project Settings -> API).
+2. In the Supabase SQL editor run:
+   ```sql
+   create extension if not exists "uuid-ossp";
+
+   create table if not exists players (
+     id uuid primary key default uuid_generate_v4(),
+     name text not null,
+     wins int not null default 0,
+     losses int not null default 0,
+     points int not null default 0
+   );
+   ```
+3. Turn on Row Level Security for the `players` table and add starter policies so the public anon key can read and write. You can refine these later when you add auth:
+   ```sql
+   alter table players enable row level security;
+
+   create policy "Public read" on players
+     for select using (true);
+
+   create policy "Anon insert" on players
+     for insert with check (true);
+
+   create policy "Anon update" on players
+     for update using (true) with check (true);
+
+   create policy "Anon delete" on players
+     for delete using (true);
+   ```
+4. Create a `.env.local` file (ignored by Git) with:
+   ```bash
+   REACT_APP_SUPABASE_URL=your-project-url
+   REACT_APP_SUPABASE_ANON_KEY=your-public-anon-key
+   ```
+   Restart the dev server so React picks up the new environment variables.
+5. In Netlify (or any host), add the same environment variables under Site settings -> Build & deploy -> Environment so production builds can talk to Supabase.
+6. Redeploy. The app fetches players from Supabase on load and persists new players and stat changes back to the `players` table.
+
+
+
+
+
