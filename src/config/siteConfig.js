@@ -1,3 +1,2 @@
-// Toggle admin/public by changing REACT_APP_SITE_MODE in .env.local (allowed: 'admin' | 'public')
-export const siteMode = process.env.REACT_APP_SITE_MODE || 'public';
-export const isAdminSite = siteMode === 'admin';
+﻿export const siteTitle = 'pickleKing';
+export const siteDescription = 'Coworker pickleball rankings at a glance.';

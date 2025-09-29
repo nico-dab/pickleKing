@@ -1,15 +1,10 @@
-import React from 'react';
+﻿import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { isAdminSite } from '../config/siteConfig';
 import { useAuth } from '../context/AuthContext';
 
 const ProtectedRoute = () => {
   const location = useLocation();
   const { user, isAdmin, loading } = useAuth();
-
-  if (!isAdminSite) {
-    return <Navigate to="/" replace />;
-  }
 
   if (loading) {
     return <div className="loading-state">Checking authentication...</div>;
