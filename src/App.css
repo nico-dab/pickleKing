@@ -112,9 +112,74 @@
   outline: none;
 }
 
+/* Hidden admin access styles */
+.App-title {
+  cursor: default;
+  user-select: none;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.App-title:active {
+  transform: scale(0.98);
+}
+
+.hidden-admin-link {
+  animation: slideInFade 0.4s ease-out;
+  background: linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(239, 68, 68, 0.15)) !important;
+  border: 1px solid rgba(248, 113, 113, 0.3) !important;
+  box-shadow: 0 0 20px rgba(248, 113, 113, 0.4) !important;
+  position: relative;
+}
+
+.hidden-admin-link::before {
+  content: '🔐';
+  margin-right: 6px;
+  font-size: 0.85em;
+}
+
+.hidden-admin-link::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(248, 113, 113, 0.1), transparent);
+  border-radius: 999px;
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 @media (min-width: 768px) {
   .App {
     width: min(520px, 38vw);
+  }
+  
+  .App-nav-link,
+  .App-nav-button {
+    flex: 1 1 auto;
+    text-align: center;
   }
 }
 
