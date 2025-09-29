@@ -1,49 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap");
+
 .App {
-  text-align: center;
-  max-width: 1200px;
+  width: min(92vw, 440px);
   margin: 0 auto;
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 32px 20px 48px;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .App-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 40px 20px;
-  color: white;
-  margin-bottom: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.88));
+  padding: 28px 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.55);
+  text-align: left;
 }
 
 .App-header h1 {
   margin: 0 0 10px 0;
-  font-size: 2.5rem;
+  font-size: 2.05rem;
+  color: #f8fafc;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'Space Grotesk', 'DM Sans', 'Inter', system-ui, sans-serif;
 }
 
 .App-header p {
   margin: 0;
-  opacity: 0.9;
-  font-size: 1.1rem;
+  color: #cbd5f5;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.App-nav {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.App-nav-link,
+.App-nav-button {
+  color: #cbd5f5;
+  text-decoration: none;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.App-nav-link:hover,
+.App-nav-button:hover {
+  background: rgba(59, 130, 246, 0.18);
+  color: #f1f5f9;
+}
+
+.App-nav-link-active {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.92), rgba(99, 102, 241, 0.85));
+  color: #0f172a;
+  box-shadow: 0 12px 24px rgba(56, 189, 248, 0.35);
+}
+
+.App-nav-button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .App-main {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 24px;
 }
 
-@media (max-width: 768px) {
+.App-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.loading-state {
+  padding: 28px 20px;
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  box-shadow: 0 14px 32px rgba(2, 6, 23, 0.45);
+  font-weight: 600;
+  color: #cbd5f5;
+  text-align: center;
+}
+
+.error-message {
+  background: rgba(248, 113, 113, 0.12);
+  color: #fecaca;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.App-nav-button:focus {
+  outline: none;
+}
+
+@media (min-width: 768px) {
   .App {
-    padding: 10px;
+    width: min(520px, 38vw);
   }
-  
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 24px 14px 40px;
+  }
+
   .App-header {
-    padding: 20px 15px;
+    padding: 22px 18px;
   }
-  
+
   .App-header h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    letter-spacing: 0.07em;
   }
+
+  .App-nav {
+    flex-wrap: wrap;
+  }
+
+  .App-nav-link,
+  .App-nav-button {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+/* Landing and auth layouts retain structure but adopt dark styling */
+.landing-page {
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+}
+
+.landing-intro h2 {
+  margin-bottom: 6px;
+  font-size: 1.8rem;
+  color: #f8fafc;
+  font-family: 'Space Grotesk', 'DM Sans', 'Inter', system-ui, sans-serif;
+}
+
+.landing-intro p {
+  margin: 0;
+  color: #cbd5f5;
+}
+
+.landing-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.landing-card {
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 34px rgba(59, 130, 246, 0.22);
+}
+
+.landing-card h3 {
+  margin: 0 0 6px 0;
+  color: #bae6fd;
+  font-size: 1.3rem;
+}
+
+.landing-card p {
+  margin: 0;
+  color: #cbd5f5;
+}
+
+.auth-section {
+  align-items: center;
+  min-height: 40vh;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 32px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 18px 40px rgba(2, 6, 23, 0.5);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-subtitle {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.auth-button {
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  border: none;
+  color: #0f172a;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(56, 189, 248, 0.3);
+}
+
+.auth-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.auth-error {
+  background: rgba(248, 113, 113, 0.16);
+  color: #fecaca;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+}
+
+.auth-success {
+  background: rgba(34, 197, 94, 0.15);
+  color: #bbf7d0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
 }

@@ -1,0 +1,93 @@
+.add-team {
+  background: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.add-team h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.add-team-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.add-team-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.add-team-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.add-team-field input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #c5c7d0;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-team-field input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  outline: none;
+}
+
+.add-team-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-team button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-team button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(118, 75, 162, 0.25);
+}
+
+.add-team button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .add-team {
+    padding: 20px 15px;
+  }
+
+  .add-team-form {
+    grid-template-columns: 1fr;
+  }
+
+  .add-team-actions {
+    justify-content: stretch;
+  }
+
+  .add-team button {
+    width: 100%;
+  }
+}
