@@ -1,4 +1,4 @@
-﻿import React from 'react';
+﻿import React, { useState, useRef, useCallback, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   NavLink,
@@ -20,6 +20,11 @@ import ProtectedRoute from './routes/ProtectedRoute';
 
 const AppRoutes = () => {
   const { user, isAdmin, signOut } = useAuth();
+  const [showHiddenAdminLink, setShowHiddenAdminLink] = useState(false);
+  const longPressTimerRef = useRef(null);
+  const hideTimerRef = useRef(null);
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef(null);
 
   const handleSignOut = async () => {
     await signOut();
@@ -31,10 +36,90 @@ const AppRoutes = () => {
     ? '/admin/singles'
     : '/admin/unauthorized';
 
+  // Show the hidden admin link for 10 seconds
+  const showAdminLink = useCallback(() => {
+    setShowHiddenAdminLink(true);
+    
+    // Clear any existing hide timer
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+    }
+    
+    // Auto-hide after 10 seconds
+    hideTimerRef.current = setTimeout(() => {
+      setShowHiddenAdminLink(false);
+    }, 10000);
+  }, []);
+
+  // Handle double-click for desktop
+  const handleTitleClick = useCallback(() => {
+    clickCountRef.current += 1;
+    
+    if (clickCountRef.current === 1) {
+      // First click - start timer for double-click detection
+      clickTimerRef.current = setTimeout(() => {
+        clickCountRef.current = 0;
+      }, 300);
+    } else if (clickCountRef.current === 2) {
+      // Double-click detected
+      clearTimeout(clickTimerRef.current);
+      clickCountRef.current = 0;
+      showAdminLink();
+    }
+  }, [showAdminLink]);
+
+
+
+  // Handle long-press for mobile
+  const handleTouchStart = useCallback(() => {
+    longPressTimerRef.current = setTimeout(() => {
+      showAdminLink();
+    }, 800); // 800ms long press
+  }, [showAdminLink]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+  }, []);
+
+  const handleTouchMove = useCallback(() => {
+    // Cancel long press if user moves finger
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+  }, []);
+
+  // Clean up timers on unmount
+  useEffect(() => {
+    return () => {
+      if (longPressTimerRef.current) {
+        clearTimeout(longPressTimerRef.current);
+      }
+      if (hideTimerRef.current) {
+        clearTimeout(hideTimerRef.current);
+      }
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{siteTitle}</h1>
+        <h1 
+          className="App-title"
+          onClick={handleTitleClick}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
+          title="Double-click or long-press for admin access"
+        >
+          {siteTitle}
+        </h1>
         <p>{siteDescription}</p>
         <nav className="App-nav">
           <NavLink
@@ -73,11 +158,11 @@ const AppRoutes = () => {
               </NavLink>
             </>
           )}
-          {!user && (
+          {!user && showHiddenAdminLink && (
             <NavLink
               to="/admin/login"
               className={({ isActive }) =>
-                'App-nav-link' + (isActive ? ' App-nav-link-active' : '')
+                'App-nav-link hidden-admin-link' + (isActive ? ' App-nav-link-active' : '')
               }
             >
               Admin Login
